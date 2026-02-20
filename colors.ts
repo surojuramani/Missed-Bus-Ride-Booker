@@ -1,0 +1,22 @@
+export default {
+  dark: {
+    background: '#0B0E14',
+    surface: '#141820',
+    card: '#1A1F2E',
+    cardElevated: '#222838',
+    text: '#F0F2F5',
+    textSecondary: '#8B92A5',
+    textMuted: '#5A6178',
+    accent: '#00D09C',
+    accentLight: '#00D09C22',
+    accentDark: '#00A87D',
+    danger: '#FF5A5F',
+    warning: '#FFB74D',
+    border: '#252B3B',
+    borderLight: '#1E2433',
+    mapBg: '#0D1117',
+    overlay: 'rgba(11, 14, 20, 0.85)',
+    white: '#FFFFFF',
+    black: '#000000',
+  },
+};
