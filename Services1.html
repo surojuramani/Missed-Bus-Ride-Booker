@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TransitIQ – Smart Campus Catch-up</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#f4f6f9;
+}
+
+header{
+background:#1e3d59;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.hero{
+text-align:center;
+padding:40px;
+background:#e8f1f8;
+}
+
+section{
+margin:30px auto;
+width:90%;
+max-width:900px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0px 3px 10px rgba(0,0,0,0.2);
+}
+
+select, button{
+padding:10px;
+margin:10px 0;
+width:100%;
+}
+
+button{
+background:#ff6e40;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+background:#ff3d00;
+}
+
+.hidden{
+display:none;
+}
+
+.ride-container{
+display:flex;
+flex-wrap:wrap;
+justify-content:space-between;
+}
+
+.ride-card{
+width:30%;
+background:#f2f2f2;
+padding:15px;
+border-radius:8px;
+text-align:center;
+margin-top:15px;
+}
+
+footer{
+text-align:center;
+padding:15px;
+background:#1e3d59;
+color:white;
+margin-top:40px;
+}
+
+@media(max-width:768px){
+.ride-card{
+width:100%;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🚍 TransitIQ</h1>
+<p>Smart Campus Transport Catch-up</p>
+</header>
+
+<div class="hero">
+<h2>Missed Your Shuttle?</h2>
+<p>Track it in real-time and catch it at the next stop.</p>
+</div>
+<div style = " text-align:center; margin-top:40px;" > <a style = "padding-right: 20px;" href = "home.html">Home</a>
+<a style = "padding-right: 20px;" href = "Services1.html">Go to Track</a>
+</div>
+
+<section>
+<h3>Select Shuttle / Bus Number</h3>
+
+<select id="busSelect">
+<option value="">-- Select Bus --</option>
+</select>
+
+<button onclick="trackBus()">I Missed This Bus</button>
+</section>
+
+<section id="trackingSection" class="hidden">
+<h3>Live Tracking</h3>
+<div id="trackingInfo"></div>
+</section>
+
+<section id="rideSection" class="hidden">
+<h3>Catch-Up Ride Options</h3>
+<div class="ride-container">
+
+<div class="ride-card">
+<h4>🏍 Bike</h4>
+<p id="bikeFare"></p>
+<button onclick="bookRide('Bike')">Book Bike</button>
+</div>
+
+<div class="ride-card">
+<h4>🚘 Sedan</h4>
+<p id="sedanFare"></p>
+<button onclick="bookRide('Sedan')">Book Sedan</button>
+</div>
+
+<div class="ride-card">
+<h4>🚙 XL / SUV</h4>
+<p id="xlFare"></p>
+<button onclick="bookRide('XL')">Book XL</button>
+</div>
+
+</div>
+</section>
+
+<section id="paymentSection" class="hidden">
+<h3>Payment</h3>
+<p>You have 60 minutes to complete payment.</p>
+<button onclick="payNow()">Pay Now</button>
+</section>
+
+<footer>
+© 2026 TransitIQ | Campus MVP Version
+</footer>
+
+<script>
+
+// Your Shuttle Numbers
+const buses = [
+"TS15UA5699","TG16T3154","TS12UE1037","TS05UA2193",
+"TG12T3038","TS06UA5268","TS15UB1439","TS08UL4487",
+"TS05UA2459","TS12UE1390","TS07UB6063","TS12UF2492",
+"AP30X8217","TS04UA5556","TS08UD4179","TS08UL8305",
+"TG16T3247","TS16T3483","TS12UE1383","TS07UB6070",
+"TG12U2578","TS08UL7436","TG16T3485","TG12T0934",
+"TS04UA0486","TG12T3032","TG08T9004","AP23TA0119",
+"TS07UB3336"
+];
+
+const select=document.getElementById("busSelect");
+
+buses.forEach(bus=>{
+let option=document.createElement("option");
+option.value=bus;
+option.text=bus;
+select.add(option);
+});
+
+function trackBus(){
+
+let selected=select.value;
+
+if(selected===""){
+alert("Please select bus number");
+return;
+}
+
+document.getElementById("trackingSection").classList.remove("hidden");
+document.getElementById("rideSection").classList.remove("hidden");
+
+let eta=Math.floor(Math.random()*10)+5;
+let distance=Math.floor(Math.random()*5)+2;
+
+document.getElementById("trackingInfo").innerHTML=
+`<p><strong>Bus Number:</strong> ${selected}</p>
+<p><strong>Estimated Arrival at Next Stop:</strong> ${eta} minutes</p>
+<p><strong>Predicted Intercept Point:</strong> Main Campus Gate</p>
+<p><strong>Distance to Intercept:</strong> ${distance} KM</p>
+<p><strong>Time Saved:</strong> ${15-eta} minutes vs waiting</p>`;
+
+let bike=distance*15;
+let sedan=distance*25;
+let xl=distance*35;
+
+document.getElementById("bikeFare").innerText="Estimated Fare: ₹"+bike;
+document.getElementById("sedanFare").innerText="Estimated Fare: ₹"+sedan;
+document.getElementById("xlFare").innerText="Estimated Fare: ₹"+xl;
+}
+
+function bookRide(type){
+alert(type+" ride booked! Driver heading to intercept point.");
+document.getElementById("paymentSection").classList.remove("hidden");
+}
+
+function payNow(){
+alert("Payment Successful. Thank you!");
+}
+
+</script>
+
+
+</body>
+</html>
